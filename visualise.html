@@ -36,7 +36,7 @@ case(taskulampun, kanssa)
 
         <textarea id="indata" style="width: 100%" rows="20"></textarea>
         <p>
-            <input type="button" onClick="javascript:exportcopra();" value="Export Corpus" />
+            <input type="button" onClick="javascript:exportCorpora();" value="Export Corpus" />
         </p>
 
         <p>
@@ -118,7 +118,7 @@ case(taskulampun, kanssa)
             // perform all embedding and support functions
             Annodoc.activate(Config.bratCollData, Collections.listing);
             $("#indata").keyup(
-                keyupfunc
+                keyUpFunc
             );
             $("#cgin").keyup(
                 cgParse
@@ -136,11 +136,11 @@ case(taskulampun, kanssa)
         var format = "";
 
         //Listener to Load file
-        document.getElementById('filename').addEventListener('change', loadfromfile, false);
+        document.getElementById('filename').addEventListener('change', loadFromFile, false);
 
         //Load Corpora from file
 		var contents = "";
-        function loadfromfile(e) {
+        function loadFromFile(e) {
 			contents = "";
             var file = e.target.files[0];
             if (!file) {
@@ -175,14 +175,14 @@ case(taskulampun, kanssa)
                 var check = splitted[i];
                 results.push(check);
             }
-            showdataindiv();
+            showDataIndiv();
         }
 
-        function showdataindiv() {
+        function showDataIndiv() {
 			document.getElementById('indata').value = (results[currentsentance]);
 			document.getElementById('currentsen').innerHTML = (currentsentance+1);
 			document.getElementById('totalsen').innerHTML = availablesentances;
-            keyupfunc();
+            keyUpFunc();
         }
 
         function prevSenSent() {
@@ -194,7 +194,7 @@ case(taskulampun, kanssa)
             if (currentsentance == 0) {
                 document.getElementById("prevSenBtn").disabled = true;
             }
-            showdataindiv();
+            showDataIndiv();
         }
 
 		//When Navigate to next item
@@ -207,11 +207,11 @@ case(taskulampun, kanssa)
             if (currentsentance > 0) {
                 document.getElementById("prevSenBtn").disabled = false;
             }
-            showdataindiv();
+            showDataIndiv();
         }
 
         //Export Corpora to file
-        function exportcopra() {
+        function exportCorpora() {
             var type = ".txt";
             if (format == "CoNLL-U") {
                 type = ".conllu";
@@ -234,7 +234,7 @@ case(taskulampun, kanssa)
         }
 		
 		//KeyUp function
-		function keyupfunc() {
+		function keyUpFunc() {
             var content = $("#indata").val();
             var firstWord = content.split(" ")[0];
 
